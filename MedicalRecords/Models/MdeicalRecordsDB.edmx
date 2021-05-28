@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MedicalRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="id_dig" />
+            <PropertyRef Name="attachment" />
+          </Key>
+          <Property Name="id_dig" Type="int" Nullable="false" />
+          <Property Name="attachment" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnose">
+          <Key>
+            <PropertyRef Name="id_dig" />
+          </Key>
+          <Property Name="id_dig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_p" Type="int" Nullable="false" />
+          <Property Name="id_d" Type="int" Nullable="false" />
+          <Property Name="disease_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="dangerous" Type="bit" Nullable="false" />
+          <Property Name="cured" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id_d" />
+          </Key>
+          <Property Name="id_d" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="sex" Type="bit" Nullable="false" />
+          <Property Name="birthdate" Type="date" />
+          <Property Name="phone" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="specialization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="age" Type="int" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="id_e" />
+          </Key>
+          <Property Name="id_e" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="available" Type="bit" Nullable="false" />
+          <Property Name="id_h" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hospital">
+          <Key>
+            <PropertyRef Name="id_h" />
+          </Key>
+          <Property Name="id_h" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="fax" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="private_clinic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="id_med" />
+          </Key>
+          <Property Name="id_med" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dig" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="start_date" Type="date" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="amount" Type="nvarchar" MaxLength="10" />
+          <Property Name="instruction" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_p" />
+          </Key>
+          <Property Name="id_p" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="father" Type="nvarchar" MaxLength="20" />
+          <Property Name="mother" Type="nvarchar" MaxLength="20" />
+          <Property Name="sex" Type="bit" Nullable="false" />
+          <Property Name="phone" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="height" Type="int" />
+          <Property Name="weight" Type="int" />
+          <Property Name="smoker" Type="bit" Nullable="false" />
+          <Property Name="id_card" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="age" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="father_id" Type="numeric" Precision="11" Scale="0" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="id_res" />
+          </Key>
+          <Property Name="id_res" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_r" Type="int" Nullable="false" />
+          <Property Name="id_p" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="id_r" />
+          </Key>
+          <Property Name="id_r" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="section" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="available" Type="bit" Nullable="false" />
+          <Property Name="id_h" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_login">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="flag" Type="int" />
+          <Property Name="id_d" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkAt">
+          <Key>
+            <PropertyRef Name="id_h" />
+            <PropertyRef Name="id_d" />
+          </Key>
+          <Property Name="id_h" Type="int" Nullable="false" />
+          <Property Name="id_d" Type="int" Nullable="false" />
+          <Property Name="start_time" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="end_time" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="sat" Type="bit" />
+          <Property Name="sun" Type="bit" />
+          <Property Name="mon" Type="bit" />
+          <Property Name="tue" Type="bit" />
+          <Property Name="wen" Type="bit" />
+          <Property Name="thu" Type="bit" />
+          <Property Name="fri" Type="bit" />
+        </EntityType>
+        <Association Name="FK__User_login__id_d__4BAC3F29">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="User_login" Type="Self.User_login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="User_login">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachment_Diagnose">
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnose">
+              <PropertyRef Name="id_dig" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="id_dig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnose_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="Diagnose">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnose_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_p" />
+            </Principal>
+            <Dependent Role="Diagnose">
+              <PropertyRef Name="id_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_Diagnose">
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="0..1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnose">
+              <PropertyRef Name="id_dig" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="id_dig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_p" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="id_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id_r" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="id_r" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAt_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkAt" Type="Self.WorkAt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="WorkAt">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAt_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkAt" Type="Self.WorkAt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="WorkAt">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalRecordsModelStoreContainer">
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnose" EntityType="Self.Diagnose" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_login" EntityType="Self.User_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkAt" EntityType="Self.WorkAt" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__User_login__id_d__4BAC3F29" Association="Self.FK__User_login__id_d__4BAC3F29">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="User_login" EntitySet="User_login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attachment_Diagnose" Association="Self.FK_Attachment_Diagnose">
+            <End Role="Diagnose" EntitySet="Diagnose" />
+            <End Role="Attachment" EntitySet="Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnose_Doctor" Association="Self.FK_Diagnose_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Diagnose" EntitySet="Diagnose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnose_Patient" Association="Self.FK_Diagnose_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Diagnose" EntitySet="Diagnose" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Hospital" Association="Self.FK_Equipment_Hospital">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_Diagnose" Association="Self.FK_Medicine_Diagnose">
+            <End Role="Diagnose" EntitySet="Diagnose" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Patient" Association="Self.FK_Reservation_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Room" Association="Self.FK_Reservation_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Hospital" Association="Self.FK_Room_Hospital">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAt_Doctor" Association="Self.FK_WorkAt_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="WorkAt" EntitySet="WorkAt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAt_Hospital" Association="Self.FK_WorkAt_Hospital">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="WorkAt" EntitySet="WorkAt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedicalRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="id_dig" />
+            <PropertyRef Name="attachment1" />
+          </Key>
+          <Property Name="id_dig" Type="Int32" Nullable="false" />
+          <Property Name="attachment1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Diagnose" Relationship="Self.FK_Attachment_Diagnose" FromRole="Attachment" ToRole="Diagnose" />
+        </EntityType>
+        <EntityType Name="Diagnose">
+          <Key>
+            <PropertyRef Name="id_dig" />
+          </Key>
+          <Property Name="id_dig" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_p" Type="Int32" Nullable="false" />
+          <Property Name="id_d" Type="Int32" Nullable="false" />
+          <Property Name="disease_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dangerous" Type="Boolean" Nullable="false" />
+          <Property Name="cured" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Attachments" Relationship="Self.FK_Attachment_Diagnose" FromRole="Diagnose" ToRole="Attachment" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Diagnose_Doctor" FromRole="Diagnose" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Diagnose_Patient" FromRole="Diagnose" ToRole="Patient" />
+          <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicine_Diagnose" FromRole="Diagnose" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="id_d" />
+          </Key>
+          <Property Name="id_d" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="age" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK_Diagnose_Doctor" FromRole="Doctor" ToRole="Diagnose" />
+          <NavigationProperty Name="User_login" Relationship="Self.FK__User_login__id_d__4BAC3F29" FromRole="Doctor" ToRole="User_login" />
+          <NavigationProperty Name="WorkAts" Relationship="Self.FK_WorkAt_Doctor" FromRole="Doctor" ToRole="WorkAt" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="id_e" />
+          </Key>
+          <Property Name="id_e" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="available" Type="Boolean" Nullable="false" />
+          <Property Name="id_h" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hospital" Relationship="Self.FK_Equipment_Hospital" FromRole="Equipment" ToRole="Hospital" />
+        </EntityType>
+        <EntityType Name="Hospital">
+          <Key>
+            <PropertyRef Name="id_h" />
+          </Key>
+          <Property Name="id_h" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="fax" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="private_clinic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Equipments" Relationship="Self.FK_Equipment_Hospital" FromRole="Hospital" ToRole="Equipment" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Hospital" FromRole="Hospital" ToRole="Room" />
+          <NavigationProperty Name="WorkAts" Relationship="Self.FK_WorkAt_Hospital" FromRole="Hospital" ToRole="WorkAt" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="id_med" />
+          </Key>
+          <Property Name="id_med" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dig" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="amount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="instruction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Diagnose" Relationship="Self.FK_Medicine_Diagnose" FromRole="Medicine" ToRole="Diagnose" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_p" />
+          </Key>
+          <Property Name="id_p" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="father" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="mother" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="phone" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="height" Type="Int32" />
+          <Property Name="weight" Type="Int32" />
+          <Property Name="smoker" Type="Boolean" Nullable="false" />
+          <Property Name="id_card" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="age" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="father_id" Type="Decimal" Precision="11" Scale="0" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK_Diagnose_Patient" FromRole="Patient" ToRole="Diagnose" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Patient" FromRole="Patient" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="id_res" />
+          </Key>
+          <Property Name="id_res" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_r" Type="Int32" Nullable="false" />
+          <Property Name="id_p" Type="Int32" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Reservation_Patient" FromRole="Reservation" ToRole="Patient" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_Reservation_Room" FromRole="Reservation" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="id_r" />
+          </Key>
+          <Property Name="id_r" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="available" Type="Boolean" Nullable="false" />
+          <Property Name="id_h" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hospital" Relationship="Self.FK_Room_Hospital" FromRole="Room" ToRole="Hospital" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_Room" FromRole="Room" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_login">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="flag" Type="Int32" />
+          <Property Name="id_d" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK__User_login__id_d__4BAC3F29" FromRole="User_login" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="WorkAt">
+          <Key>
+            <PropertyRef Name="id_h" />
+            <PropertyRef Name="id_d" />
+          </Key>
+          <Property Name="id_h" Type="Int32" Nullable="false" />
+          <Property Name="id_d" Type="Int32" Nullable="false" />
+          <Property Name="start_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="end_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sat" Type="Boolean" />
+          <Property Name="sun" Type="Boolean" />
+          <Property Name="mon" Type="Boolean" />
+          <Property Name="tue" Type="Boolean" />
+          <Property Name="wen" Type="Boolean" />
+          <Property Name="thu" Type="Boolean" />
+          <Property Name="fri" Type="Boolean" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_WorkAt_Doctor" FromRole="WorkAt" ToRole="Doctor" />
+          <NavigationProperty Name="Hospital" Relationship="Self.FK_WorkAt_Hospital" FromRole="WorkAt" ToRole="Hospital" />
+        </EntityType>
+        <Association Name="FK_Attachment_Diagnose">
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnose">
+              <PropertyRef Name="id_dig" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="id_dig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnose_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="Diagnose">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnose_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_p" />
+            </Principal>
+            <Dependent Role="Diagnose">
+              <PropertyRef Name="id_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_Diagnose">
+          <End Role="Diagnose" Type="Self.Diagnose" Multiplicity="0..1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnose">
+              <PropertyRef Name="id_dig" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="id_dig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_login__id_d__4BAC3F29">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="User_login" Type="Self.User_login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="User_login">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAt_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkAt" Type="Self.WorkAt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="id_d" />
+            </Principal>
+            <Dependent Role="WorkAt">
+              <PropertyRef Name="id_d" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAt_Hospital">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkAt" Type="Self.WorkAt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="id_h" />
+            </Principal>
+            <Dependent Role="WorkAt">
+              <PropertyRef Name="id_h" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_p" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="id_p" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id_r" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="id_r" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalRecordsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnose" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+          <EntitySet Name="Hospitals" EntityType="Self.Hospital" />
+          <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="User_login" EntityType="Self.User_login" />
+          <EntitySet Name="WorkAts" EntityType="Self.WorkAt" />
+          <AssociationSet Name="FK_Attachment_Diagnose" Association="Self.FK_Attachment_Diagnose">
+            <End Role="Diagnose" EntitySet="Diagnoses" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnose_Doctor" Association="Self.FK_Diagnose_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Diagnose" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnose_Patient" Association="Self.FK_Diagnose_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Diagnose" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_Diagnose" Association="Self.FK_Medicine_Diagnose">
+            <End Role="Diagnose" EntitySet="Diagnoses" />
+            <End Role="Medicine" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_login__id_d__4BAC3F29" Association="Self.FK__User_login__id_d__4BAC3F29">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="User_login" EntitySet="User_login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAt_Doctor" Association="Self.FK_WorkAt_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="WorkAt" EntitySet="WorkAts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Hospital" Association="Self.FK_Equipment_Hospital">
+            <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="Equipment" EntitySet="Equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Hospital" Association="Self.FK_Room_Hospital">
+            <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAt_Hospital" Association="Self.FK_WorkAt_Hospital">
+            <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="WorkAt" EntitySet="WorkAts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Patient" Association="Self.FK_Reservation_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Room" Association="Self.FK_Reservation_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedicalRecordsModelStoreContainer" CdmEntityContainer="MedicalRecordsEntities">
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="id_dig" ColumnName="id_dig" />
+                <ScalarProperty Name="attachment1" ColumnName="attachment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnoses">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Diagnose">
+              <MappingFragment StoreEntitySet="Diagnose">
+                <ScalarProperty Name="id_dig" ColumnName="id_dig" />
+                <ScalarProperty Name="id_p" ColumnName="id_p" />
+                <ScalarProperty Name="id_d" ColumnName="id_d" />
+                <ScalarProperty Name="disease_name" ColumnName="disease_name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="dangerous" ColumnName="dangerous" />
+                <ScalarProperty Name="cured" ColumnName="cured" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="id_d" ColumnName="id_d" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="specialization" ColumnName="specialization" />
+                <ScalarProperty Name="age" ColumnName="age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="id_e" ColumnName="id_e" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="available" ColumnName="available" />
+                <ScalarProperty Name="id_h" ColumnName="id_h" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hospitals">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Hospital">
+              <MappingFragment StoreEntitySet="Hospital">
+                <ScalarProperty Name="id_h" ColumnName="id_h" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="private_clinic" ColumnName="private_clinic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="id_med" ColumnName="id_med" />
+                <ScalarProperty Name="id_dig" ColumnName="id_dig" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="instruction" ColumnName="instruction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="id_p" ColumnName="id_p" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="father" ColumnName="father" />
+                <ScalarProperty Name="mother" ColumnName="mother" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="smoker" ColumnName="smoker" />
+                <ScalarProperty Name="id_card" ColumnName="id_card" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="father_id" ColumnName="father_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="id_res" ColumnName="id_res" />
+                <ScalarProperty Name="id_r" ColumnName="id_r" />
+                <ScalarProperty Name="id_p" ColumnName="id_p" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="id_r" ColumnName="id_r" />
+                <ScalarProperty Name="section" ColumnName="section" />
+                <ScalarProperty Name="available" ColumnName="available" />
+                <ScalarProperty Name="id_h" ColumnName="id_h" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_login">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.User_login">
+              <MappingFragment StoreEntitySet="User_login">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="id_d" ColumnName="id_d" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkAts">
+            <EntityTypeMapping TypeName="MedicalRecordsModel.WorkAt">
+              <MappingFragment StoreEntitySet="WorkAt">
+                <ScalarProperty Name="id_h" ColumnName="id_h" />
+                <ScalarProperty Name="id_d" ColumnName="id_d" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="sat" ColumnName="sat" />
+                <ScalarProperty Name="sun" ColumnName="sun" />
+                <ScalarProperty Name="mon" ColumnName="mon" />
+                <ScalarProperty Name="tue" ColumnName="tue" />
+                <ScalarProperty Name="wen" ColumnName="wen" />
+                <ScalarProperty Name="thu" ColumnName="thu" />
+                <ScalarProperty Name="fri" ColumnName="fri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

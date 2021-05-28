@@ -1,0 +1,24 @@
+﻿@model MVCTutorial2.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<div class="container" style="width:60%;margin-top:2%">
+    @if (Model != null)
+    {
+        <ul class="list-group">
+            <li class="list-group-item active">Employee Information</li>
+            <li class="list-group-item">Employee ID : <b>@Model.EmployeeId</b></li>
+            <li class="list-group-item">Employee Name : <b>@Model.Name</b></li>
+            <li class="list-group-item">Employee Address : <b>@Model.Address</b></li>
+            <li class="list-group-item">Department ID : <b>@Model.DepartmentId</b></li>
+        </ul>
+    }
+
+
+}
+
+
+</div>

@@ -1,0 +1,27 @@
+﻿@model Test.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="container" style="width:60%;margin-top:2%">
+
+    @if (Model != null)
+    {
+
+        <ul class="list-group">
+            <li class="list-group-item active">Employee Information</li>
+            <li class="list-group-item">Emolyee Id : <b>@Model.EmployeeId</b></li>
+            <li class="list-group">Employee Name : <b>@Model.Name</b> </li>
+            <li class="list-group">Employee Gender : <b>@Model.Gender</b></li>
+            <li class="list-group">Employee City : <b>@Model.City</b></li>
+            <li class="list-group">Department Id : <b>@Model.Departmentd</b></li>
+        </ul>
+
+    }
+
+
+
+</div>

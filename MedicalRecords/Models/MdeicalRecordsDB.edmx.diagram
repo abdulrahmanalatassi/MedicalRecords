@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b8e3e31f42dc4c6cbe5350a3137a534b" Name="Diagram1">
+        <EntityTypeShape EntityType="MedicalRecordsModel.Attachment" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Diagnose" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Doctor" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Equipment" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Hospital" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Medicine" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Patient" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Reservation" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.Room" Width="1.5" PointX="6" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.sysdiagram" Width="1.5" PointX="8.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.User_login" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalRecordsModel.WorkAt" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Attachment_Diagnose" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Diagnose_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Diagnose_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Medicine_Diagnose" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK__User_login__id_d__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_WorkAt_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Equipment_Hospital" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Room_Hospital" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_WorkAt_Hospital" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Reservation_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalRecordsModel.FK_Reservation_Room" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,66 @@
+﻿@model MedicalRecords.Models.Medicine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.start_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.start_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.end_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.end_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.instruction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.instruction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnose.disease_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnose.disease_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_med }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

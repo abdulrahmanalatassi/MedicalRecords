@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MedicalRecords.Models.Diagnose>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.disease_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dangerous)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cured)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor.first_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.firstname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.disease_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dangerous)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cured)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor.first_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.firstname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_dig }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_dig }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_dig })
+        </td>
+    </tr>
+}
+
+</table>
